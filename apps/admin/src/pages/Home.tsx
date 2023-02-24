@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { useContext } from 'react';
 import reactLogo from '../assets/react.svg';
 import viteLogo from '../assets/vite.svg';
@@ -19,9 +20,9 @@ export const Home = () => {
         </div>
         <h1>Vite + React</h1>
         <div className='card'>
-          <button onClick={() => setCount((count: number) => count + 1)}>
+          <Button variant='contained' onClick={() => setCount((count: number) => count + 1)}>
             count is {<Count />}
-          </button>
+          </Button>
           <p>
             Edit <code>src/App.tsx</code> and save to test HMR
           </p>
