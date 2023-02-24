@@ -39,4 +39,5 @@ function App() {
   );
 }
 
+console.log(import.meta.env.VITE_HOST);
 export default App;

@@ -39,4 +39,6 @@ function App() {
   );
 }
 
+console.log(import.meta.env.VITE_DEVSERVER);
+
 export default App;
