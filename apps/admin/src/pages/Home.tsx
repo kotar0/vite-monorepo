@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import reactLogo from '../assets/react.svg';
 import viteLogo from '../assets/vite.svg';
-import { GlobalContext } from '../providers/SampleGlobalProvider';
+import { GlobalContext, IGlobalContext } from '../providers/SampleGlobalProvider';
 
 export const Home = () => {
-  const [, setCount] = useContext(GlobalContext);
+  const { setCount } = useContext(GlobalContext) as IGlobalContext;
 
   return (
     <>
@@ -33,6 +33,6 @@ export const Home = () => {
 };
 
 function Count() {
-  const [count] = useContext(GlobalContext);
+  const { count } = useContext(GlobalContext) as IGlobalContext;
   return <span>{count}</span>;
 }
