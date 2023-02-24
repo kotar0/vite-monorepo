@@ -1,0 +1,42 @@
+{
+  "name": "vite-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "yarn turbo run dev --parallel --no-cache",
+    "dev:admin": "yarn turbo run dev --parallel --no-cache --scope=admin",
+    "dev:client": "yarn turbo run dev --parallel --no-cache --scope=client",
+    "build": "yarn turbo run build",
+    "build:admin": "yarn turbo run build --scope=admin",
+    "build:client": "yarn turbo run build --scope=client",
+    "preview": "yarn turbo run preview",
+    "preview:admin": "yarn turbo run preview --scope=admin",
+    "preview:client": "yarn turbo run preview --scope=client",
+    "lint": "yarn eslint apps",
+    "lint:fix": "yarn lint -- --fix",
+    "prettier": "yarn prettier apps --check",
+    "prettier:fix": "yarn prettier -- --write",
+    "format": "yarn prettier:fix && yarn lint:fix"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/client",
+    "apps/admin"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.8.4",
+    "turbo": "^1.8.1",
+    "typescript": "^4.9.5"
+  }
+}
