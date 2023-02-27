@@ -6,8 +6,19 @@ import viteLogo from '../assets/vite.svg';
 import { Count } from '../components/Count';
 import { GlobalContext, IGlobalContext } from '../providers/SampleGlobalProvider';
 
+// const fetcher = axios.post('/login').then((res) => res);
+
 export const Counter = ({ title }: { title: string }) => {
   const { setCount } = useContext(GlobalContext) as IGlobalContext;
+
+  //   useEffect(() => {
+  //     axios.post('/login').then((res) => {
+  //       console.log(res.data);
+  //       axios.get('/user').then((res) => {
+  //         console.log(res.data);
+  //       });
+  //     });
+  //   }, []);
 
   return (
     <Grid container spacing={2}>
