@@ -8,7 +8,6 @@ const fetcherGet = (url: string) => axios.get(url).then((res) => res.data);
 export default function Home() {
   useSWR('/login', fetcher);
   const { data } = useSWR('/user', fetcherGet);
-  console.log(data);
 
-  return <Counter title='Home'></Counter>;
+  return <Counter title='Home' data={data}></Counter>;
 }

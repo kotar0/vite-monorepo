@@ -3,6 +3,16 @@ import { rest } from 'msw';
 
 export const handlers = [
   // Handles a POST /login request
+  rest.post('/auth', (_req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.delay(1000),
+      ctx.json({
+        id: faker.datatype.uuid(),
+        token: faker.datatype.string(10),
+      }),
+    );
+  }),
   rest.post('/login', (_req, res, ctx) => {
     sessionStorage.setItem('is-auth', 'true');
     return res(ctx.status(200));

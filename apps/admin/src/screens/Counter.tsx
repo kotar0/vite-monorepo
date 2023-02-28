@@ -8,17 +8,14 @@ import { GlobalContext, IGlobalContext } from '../providers/SampleGlobalProvider
 
 // const fetcher = axios.post('/login').then((res) => res);
 
-export const Counter = ({ title }: { title: string }) => {
+export const Counter = ({
+  title,
+  data,
+}: {
+  title: string;
+  data?: { id: string; firstName: string; lastName: string; email: string };
+}) => {
   const { setCount } = useContext(GlobalContext) as IGlobalContext;
-
-  //   useEffect(() => {
-  //     axios.post('/login').then((res) => {
-  //       console.log(res.data);
-  //       axios.get('/user').then((res) => {
-  //         console.log(res.data);
-  //       });
-  //     });
-  //   }, []);
 
   return (
     <Grid container spacing={2}>
@@ -33,6 +30,8 @@ export const Counter = ({ title }: { title: string }) => {
             </a>
           </div>
           <h1>{title}</h1>
+          {data && <h2>Hello, {data?.lastName + data?.firstName}</h2>}
+          <pre>{JSON.stringify(data, null, 2)}</pre>
           <div className='card'>
             <Button variant='contained' onClick={() => setCount((count: number) => count + 1)}>
               count is&nbsp;{<Count />}
