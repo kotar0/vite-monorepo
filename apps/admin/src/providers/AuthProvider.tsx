@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setToken(data.token);
       // return data;
     }
-  }, [data, setToken]);
+  }, [authState, data, setToken]);
 
   const logout = useCallback(
     ({ callback }: { callback: () => void }) => {

@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from '../layout/AppShell';
 import { Login } from '../pages/Login';
 import { User } from '../pages/User';
+import { AuthGuard } from './AuthGuard';
 
 const Home = lazy(() => import('../pages/Home'));
 
@@ -18,9 +19,11 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: (
-          <Suspense fallback={<div>Page is Loading...</div>}>
-            <Home />
-          </Suspense>
+          <AuthGuard redirectTo='/login'>
+            <Suspense fallback={<div>Page is Loading...</div>}>
+              <Home />
+            </Suspense>
+          </AuthGuard>
         ),
       },
       {

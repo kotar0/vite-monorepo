@@ -28,14 +28,14 @@ export const LoginScreen = () => {
     login({
       id: 'aaaa',
       password: 'ppppp',
-    }).then(() => {
-      navigate('/');
     });
   };
 
   useEffect(() => {
     console.log(getToken());
-    console.log(authState);
+    if (authState === 'AUTHENTICATED') {
+      navigate('/');
+    }
   }, [authState, getToken, navigate]);
 
   return (
