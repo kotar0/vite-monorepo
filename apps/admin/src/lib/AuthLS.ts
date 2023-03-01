@@ -1,5 +1,3 @@
-import { useLocalStorage } from 'react-use';
-
 const ACCESS_TOKEN_KEY = 'access-token';
 
 export const useAuthLS = () => {

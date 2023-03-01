@@ -16,7 +16,31 @@ import {
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import { Link, Outlet } from 'react-router-dom';
+import { forwardRef, ReactElement } from 'react';
+import { Link as RouterLink, LinkProps as RouterLinkProps, Outlet } from 'react-router-dom';
+
+type ListItemLinkProps = {
+  icon?: ReactElement;
+  primary: string;
+  to: string;
+};
+
+const Link = forwardRef<HTMLAnchorElement, RouterLinkProps>(function Link(itemProps, ref) {
+  return <RouterLink ref={ref} {...itemProps} role={undefined} />;
+});
+
+const ListItemLink = (props: ListItemLinkProps) => {
+  const { icon, primary, to, ...rest } = props;
+
+  return (
+    <ListItem disablePadding component={Link} to={to} {...rest}>
+      <ListItemButton>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItemButton>
+    </ListItem>
+  );
+};
 
 export const AppShell = () => {
   return (
@@ -43,26 +67,8 @@ export const AppShell = () => {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            <ListItem disablePadding>
-              <Link to={'/'}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={'Home'} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <Link to={'/user'}>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={'User'} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
+            <ListItemLink to='/' primary='Home' icon={<InboxIcon />} />
+            <ListItemLink to='/user' primary='User' icon={<InboxIcon />} />
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
