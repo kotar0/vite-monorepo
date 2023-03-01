@@ -15,22 +15,28 @@ import {
 } from '@mui/material';
 import { FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLogin } from '../api/login';
+import { useAuth } from '../hooks/useAuth';
+import { useAuthLS } from '../lib/AuthLS';
 
 export const LoginScreen = () => {
   const navigate = useNavigate();
-  const { data, trigger, isMutating } = useLogin();
+  const { authState, login, isMutating } = useAuth();
+  const { getToken } = useAuthLS();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    trigger();
+    login({
+      id: 'aaaa',
+      password: 'ppppp',
+    }).then(() => {
+      navigate('/');
+    });
   };
 
   useEffect(() => {
-    if (data) {
-      navigate('/');
-    }
-  }, [data, navigate]);
+    console.log(getToken());
+    console.log(authState);
+  }, [authState, getToken, navigate]);
 
   return (
     <Container component='main' maxWidth='xs'>

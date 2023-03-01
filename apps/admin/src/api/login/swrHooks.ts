@@ -1,18 +1,13 @@
-import { useEffect } from 'react';
+import { Key } from 'swr/_internal';
 import useSWRMutation from 'swr/mutation';
-import { Auth } from './../../types/Auth';
+import { Auth, LoginPostParam } from './../../types/Auth';
 import { postLoginFetcher } from './fetcher';
 
-export const useLogin = () => {
-  const { data, error, isMutating, ...props } = useSWRMutation<Auth>('/auth', postLoginFetcher);
-
-  //  useAuthに移植
-  useEffect(() => {
-    if (!error) {
-      console.log(data);
-      data?.token && localStorage.setItem('auth-token', data.token);
-    }
-  }, [data, error]);
+export const useLogin = (endpoint = '/auth') => {
+  const { data, error, isMutating, ...props } = useSWRMutation<Auth, any, Key, LoginPostParam>(
+    endpoint,
+    postLoginFetcher,
+  );
 
   return { data, error, isMutating, ...props };
 };
