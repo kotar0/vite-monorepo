@@ -13,30 +13,15 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { FormEvent, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { useAuthLS } from '../lib/AuthLS';
 
-export const LoginScreen = () => {
-  const navigate = useNavigate();
-  const { authState, login, isMutating } = useAuth();
-  const { getToken } = useAuthLS();
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    login({
-      id: 'aaaa',
-      password: 'ppppp',
-    });
-  };
-
-  useEffect(() => {
-    console.log(getToken());
-    if (authState === 'AUTHENTICATED') {
-      navigate('/');
-    }
-  }, [authState, getToken, navigate]);
+export const LoginScreen = ({
+  handleSubmit,
+}: {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+}) => {
+  const { isMutating } = useAuth();
 
   return (
     <Container component='main' maxWidth='xs'>

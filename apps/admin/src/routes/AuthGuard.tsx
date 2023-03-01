@@ -14,13 +14,11 @@ export const AuthGuard = ({
 
   useEffect(() => {
     if (!isMutating && authState === 'UNAUTHENTICATED') {
-      console.log('REDIRECT');
       navigate(redirectTo);
-    } else if (authState === 'AUTHENTICATED') {
-      console.log('NOT REDIRECT');
     }
   }, [authState, isMutating, navigate, redirectTo]);
 
+  // TODO FIXME: 返り値は適当に設定しているので見直す
   if (authState === 'AUTHENTICATED') {
     return <>{children}</>;
   } else return <></>;
