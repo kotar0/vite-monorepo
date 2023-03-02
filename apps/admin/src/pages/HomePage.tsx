@@ -7,5 +7,5 @@ const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 export default function HomePage() {
   const { data } = useSWR('/user', fetcher);
 
-  return <CounterScreen title='Home' data={data}></CounterScreen>;
+  return <CounterScreen title='Home' data={data} />;
 }
