@@ -1,5 +1,5 @@
-import { ReactElement, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ReactElement } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 export const AuthGuard = ({
@@ -9,17 +9,14 @@ export const AuthGuard = ({
   children: ReactElement;
   redirectTo: string;
 }) => {
-  const { authState, isMutating } = useAuth();
-  const navigate = useNavigate();
+  const { authState } = useAuth();
 
-  useEffect(() => {
-    if (!isMutating && authState === 'UNAUTHENTICATED') {
-      navigate(redirectTo);
+  switch (authState) {
+    case 'AUTHENTICATED': {
+      return children;
     }
-  }, [authState, isMutating, navigate, redirectTo]);
-
-  // TODO FIXME: 返り値は適当に設定しているので見直す
-  if (authState === 'AUTHENTICATED') {
-    return <>{children}</>;
-  } else return <></>;
+    case 'UNAUTHENTICATED': {
+      return <Navigate to={redirectTo} replace />;
+    }
+  }
 };

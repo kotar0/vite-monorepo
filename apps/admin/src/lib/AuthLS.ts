@@ -18,13 +18,7 @@ export const useAuthLS = () => {
   };
 
   const removeToken = () => {
-    try {
-      localStorage.removeItem(ACCESS_TOKEN_KEY);
-      return true;
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
   };
 
   return {

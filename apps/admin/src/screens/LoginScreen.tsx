@@ -65,7 +65,13 @@ export const LoginScreen = ({
             control={<Checkbox value='remember' color='primary' />}
             label='Remember me'
           />
-          <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+          <Button
+            disabled={isMutating}
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
+          >
             {!isMutating ? 'ログイン' : <CircularProgress color='secondary' />}
           </Button>
           <Grid container>

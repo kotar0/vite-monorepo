@@ -17,7 +17,13 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { forwardRef, ReactElement } from 'react';
-import { Link as RouterLink, LinkProps as RouterLinkProps, Outlet } from 'react-router-dom';
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+  Outlet,
+  useNavigate,
+} from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 type ListItemLinkProps = {
   icon?: ReactElement;
@@ -43,6 +49,17 @@ const ListItemLink = (props: ListItemLinkProps) => {
 };
 
 export const AppShell = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout({
+      callback: () => {
+        navigate('/login');
+      },
+    });
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -53,7 +70,9 @@ export const AppShell = () => {
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             Project Name
           </Typography>
-          <Button color='inherit'>Login</Button>
+          <Button color='inherit' onClick={handleLogout}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer

@@ -1,4 +1,5 @@
 import { RouterProvider } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 import { router } from '../routes/Router';
 import { AuthProvider } from './AuthProvider';
 import { MuiThemeProvider } from './MuiThemeProvider';
@@ -9,10 +10,12 @@ export const AppProviders = ({ children }: { children?: React.ReactNode }) => {
     <>
       <SampleGlobalProvider>
         <MuiThemeProvider>
-          <AuthProvider>
-            <RouterProvider router={router} />
-            {children}
-          </AuthProvider>
+          <SWRConfig>
+            <AuthProvider>
+              <RouterProvider router={router} />
+              {children}
+            </AuthProvider>
+          </SWRConfig>
         </MuiThemeProvider>
       </SampleGlobalProvider>
     </>

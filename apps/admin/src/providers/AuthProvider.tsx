@@ -7,16 +7,14 @@ import { AuthState, LoginPostParam } from '../types/Auth';
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { setToken, getToken, removeToken } = useAuthLS();
   const accessToken = getToken();
+  const { data, trigger, error, isMutating, reset } = useLogin('/auth');
 
   // TODO トークンがあれば認証状態ではなく、トークンが有効であればに変更する
   const [authState, setAuthState] = useState<AuthState>(() =>
     accessToken ? 'AUTHENTICATED' : 'UNAUTHENTICATED',
   );
 
-  const { data, trigger, error, isMutating } = useLogin('/auth');
-
   // TODO トークンの有効期限を確認する処理いりそう
-  // const refresh;
 
   const login = useCallback(
     async (param: LoginPostParam) => {
@@ -31,20 +29,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
+    // ポストリクエストが成功する ＝ dataが更新されている
     if (data) {
       console.log('Login Success');
       setAuthState('AUTHENTICATED');
       setToken(data.token);
-      // return data;
     }
-  }, [authState, data, setToken]);
+  }, [data, setToken]);
 
   const logout = useCallback(
-    ({ callback }: { callback: () => void }) => {
+    ({ callback }: { callback?: () => void } = {}) => {
+      reset();
       removeToken();
-      callback();
+      setAuthState('UNAUTHENTICATED');
+      callback && callback();
     },
-    [removeToken],
+    [removeToken, reset],
   );
 
   const AuthValue = useMemo(
