@@ -18,5 +18,8 @@ export const AuthGuard = ({
     case 'UNAUTHENTICATED': {
       return <Navigate to={redirectTo} replace />;
     }
+    default: {
+      return <></>;
+    }
   }
 };

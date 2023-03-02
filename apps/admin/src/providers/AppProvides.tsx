@@ -8,16 +8,16 @@ import { SampleGlobalProvider } from './SampleGlobalProvider';
 export const AppProviders = ({ children }: { children?: React.ReactNode }) => {
   return (
     <>
-      <SampleGlobalProvider>
-        <MuiThemeProvider>
-          <SWRConfig>
-            <AuthProvider>
+      <MuiThemeProvider>
+        <SWRConfig>
+          <AuthProvider>
+            <SampleGlobalProvider>
               <RouterProvider router={router} />
               {children}
-            </AuthProvider>
-          </SWRConfig>
-        </MuiThemeProvider>
-      </SampleGlobalProvider>
+            </SampleGlobalProvider>
+          </AuthProvider>
+        </SWRConfig>
+      </MuiThemeProvider>
     </>
   );
 };
