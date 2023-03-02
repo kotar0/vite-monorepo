@@ -1,11 +1,11 @@
 import axios from 'axios';
 import useSWR from 'swr';
-import { Counter } from '../screens/Counter';
+import { CounterScreen } from '../screens/CounterScreen';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-export default function Home() {
+export default function HomePage() {
   const { data } = useSWR('/user', fetcher);
 
-  return <Counter title='Home' data={data}></Counter>;
+  return <CounterScreen title='Home' data={data}></CounterScreen>;
 }

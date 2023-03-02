@@ -1,16 +1,16 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from '../layout/AppShell';
-import { Login } from '../pages/Login';
-import { User } from '../pages/User';
+import { LoginPage } from '../pages/LoginPage';
+import { UserPage } from '../pages/UserPage';
 import { AuthGuard } from './AuthGuard';
 
-const Home = lazy(() => import('../pages/Home'));
+const HomePage = lazy(() => import('../pages/HomePage'));
 
 export const router = createBrowserRouter([
   {
     path: '/login',
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: '/',
@@ -21,14 +21,14 @@ export const router = createBrowserRouter([
         element: (
           <AuthGuard redirectTo='/login'>
             <Suspense fallback={<div>Page is Loading...</div>}>
-              <Home />
+              <HomePage />
             </Suspense>
           </AuthGuard>
         ),
       },
       {
         path: '/user',
-        element: <User />,
+        element: <UserPage />,
       },
     ],
   },

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { LoginScreen } from '../screens/LoginScreen';
 
-export const Login = () => {
+export const LoginPage = () => {
   const navigate = useNavigate();
   const { authState, login } = useAuth();
 

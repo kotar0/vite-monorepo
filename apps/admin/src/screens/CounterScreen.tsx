@@ -8,7 +8,7 @@ import { GlobalContext, IGlobalContext } from '../providers/SampleGlobalProvider
 
 // const fetcher = axios.post('/login').then((res) => res);
 
-export const Counter = ({
+export const CounterScreen = ({
   title,
   data,
 }: {
