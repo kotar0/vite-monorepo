@@ -6,6 +6,8 @@
     },
     "dev": {},
     "preview": {},
-    "lint": {}
+    "lint": {},
+    "test": {},
+    "test:watch": {}
   }
 }

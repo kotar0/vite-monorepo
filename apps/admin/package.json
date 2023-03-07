@@ -7,7 +7,9 @@
     "dev": "vite --port 8080",
     "build:staging": "vite build --mode staging",
     "build:production": "vite build --mode production",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
